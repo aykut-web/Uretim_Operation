@@ -1,0 +1,178 @@
+﻿@model IEnumerable<Uretim_Operation.Models.Notifications>
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+    <p>
+        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Bildirim Ekle</button>
+    </p>
+
+
+    <div class="justify-content-md-center">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.BaslangicTarihi)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.BitisTarihi)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ToplamSure)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Statu)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DurusNedeni)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BaslangicTarihi)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BitisTarihi)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ToplamSure)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Statu)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DurusNedeni)
+                        </td>
+                        @*<td>
+                                <a asp-action="Edit" asp-route-id="@item.IsNo">Edit</a> |
+                                <a asp-action="Details" asp-route-id="@item.IsNo">Details</a> |
+                                <a asp-action="Delete" asp-route-id="@item.IsNo">Delete</a>
+                            </td>*@
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Modal Header</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-flex justify-content-center">
+                        <div class="col-md-3">
+                            <label>* İş No:</label>
+                            <input id="isNo" type="text" class="form-control input-sm" />
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <div class="col-md-3">
+                            <label>* Baslangıc Tarihi:</label>
+                            <input id="baslangicTarihi" type="datetime-local" value="@(DateTime.Now.ToString("yyyy-MM-dd"))"
+                                   class="form-control input-sm" />
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <div class="col-md-3">
+                            <label>* Bitis Tarihi:</label>
+                            <input id="bitisTarihi" type="datetime-local"
+                                   value="@(DateTime.Now.AddYears(1).ToString("yyyy-MM-dd"))"
+                                   class="form-control input-sm" />
+                        </div>
+                    </div>
+                    @*<div class="d-flex justify-content-center">
+                        <div class="col-md-3">
+                            <label>* Toplam Süre:</label>
+                            <input id="toplamSure" type="time" class="form-control input-sm" />
+                        </div>
+                    </div>*@
+                    <div class="d-flex justify-content-center">
+                        <div class="col-md-3">
+                            <label>* Statu:</label>
+                            <input id="statu" type="text" class="form-control input-sm" />
+                        </div>
+                    </div>
+                    @*<div class="d-flex justify-content-center">
+                        <div class="col-md-3">
+                            <label>* Duruş Nedeni:</label>
+                            <input id="durusNedeni" type="text" class="form-control input-sm" />
+                        </div>
+                    </div>*@
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button onclick="SaveNoti()" type="button" class="btn btn-dark">Kaydet</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"></script>
+</body>
+</html>
+
+
+
+
+<script>
+
+    function SaveNoti() {
+        var isNo = $("#isNo").val();
+        var baslangicTarihi = $("#baslangicTarihi").val();
+        var bitisTarihi = $("#bitisTarihi").val();
+        var toplamSure = $("#toplamSure").val();
+        var statu = $("#statu").val();
+        var durusNedeni = $("#durusNedeni").val();
+
+       
+        if (isNo == "" || baslangicTarihi == "" || bitisTarihi == "" || statu == "") {
+            alert("Hata ! Yıldızlı (*) alanları boş bırakmayiniz..");
+            return;
+        }
+        $.ajax({
+            url: '@Url.Action("CreateNotification", "Notifications")',
+            dataType: 'json',
+            data: {
+
+                "_IsNo": isNo,
+                "_BaslangicTarihi": baslangicTarihi,
+                "_BitisTarihi": bitisTarihi,
+                "_ToplamSure": toplamSure,
+                "_Statu": statu,
+                "_DurusNedeni": durusNedeni
+            },
+
+            success: function (data) {
+                if (data) {
+                    alert("Başarılı! Bildirim Kaydedildi");
+                }
+            }
+        });
+    }
+
+</script>
